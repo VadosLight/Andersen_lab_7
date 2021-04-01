@@ -1,0 +1,63 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Avenir Next",
+    Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(31, 37, 39, 1);
+}
+
+.calculator {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.8fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "input input input input input"
+    ". . . . ."
+    ". . . . ."
+    ". . . . ."
+    ". . . solve solve";
+
+  border-radius: 10px;
+  min-width: 380px;
+  min-height: 500px;
+  padding: 5px;
+}
+
+#calculator__input {
+  grid-area: input;
+  font-size: 1.5rem;
+
+  background-color: rgb(28, 28, 28);
+  border: 1px solid rgb(35, 51, 54);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: end;
+  color: rgb(215, 225, 227);
+  text-decoration: none solid rgb(215, 225, 227);
+
+  cursor: not-allowed;
+  
+}
+
+.calculator__button {
+  font-size: 1.5rem;
+  background-color: rgb(32, 32, 32);
+  border: 1px solid rgb(35, 51, 54);
+  border-radius: 8px;
+  color: rgb(215, 225, 227);
+}
+
+#btn_solve {
+  grid-area: solve;
+}
