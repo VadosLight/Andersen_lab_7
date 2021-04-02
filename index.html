@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <div class="calculator" shadow="1" gap="1x">
-      <input
+    <div class="calculator">
+      <textarea
         type="text"
-        id="calculator__input"        
-        placeholder="..."      
+        id="calculator__input"
+        placeholder="..."
         readonly
-        disabled        
-      ></input>
+        disabled
+        
+      ></textarea>
       <button class="calculator__button">1</button>
       <button class="calculator__button">2</button>
       <button class="calculator__button">3</button>
@@ -38,7 +39,7 @@
       <button class="calculator__button">.</button>
       <button class="calculator__button">del</button>
       <button id="btn_solve" class="calculator__button">=</button>
-    </div>   
+    </div>
     <script type="module" src="./calculator.js"></script>
   </body>
 </html>

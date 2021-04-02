@@ -13,7 +13,6 @@ body {
 
   width: 98vw;
   height: 98vh;
-  /* background-color: rgba(31, 37, 39, 1); */
   background-color: rgb(28, 28, 28);
 }
 
@@ -23,36 +22,35 @@ body {
   grid-template-rows: 0.8fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-  "input input input input input"
-  ". . . . ."
-  ". . . . ."
-  ". . . . ."
-  ". . . solve solve";
+    "input input input input input"
+    ". . . . ."
+    ". . . . ."
+    ". . . . ."
+    ". . . solve solve";
 
   border-radius: 10px;
   min-width: 380px;
   min-height: 500px;
   padding: 5px;
 
-  box-shadow: 2px 2px 8px 3px  black;
+  box-shadow: 2px 2px 8px 3px black;
 }
 
 #calculator__input {
   grid-area: input;
+  padding: 3px 15px;
+
   font-size: 1.5rem;
+  color: rgb(215, 225, 227);
+  cursor: not-allowed;
+  text-align: end;
 
   background-color: rgb(28, 28, 28);
   border: 1px solid rgb(35, 51, 54);
   border-radius: 8px;
-  padding: 10px;
-  text-align: end;
-  color: rgb(215, 225, 227);
-  text-decoration: none solid rgb(215, 225, 227);
 
-  cursor: not-allowed;
-  word-wrap: break-word;
-  word-break: break-all;
-  
+  resize: none;
+  outline: none;
 }
 
 .calculator__button {
@@ -65,9 +63,6 @@ body {
   color: rgb(215, 225, 227);
 
   user-select: none;
-  /* -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none; */
 }
 
 #btn_solve {

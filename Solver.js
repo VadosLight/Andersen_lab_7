@@ -116,8 +116,9 @@ export default class Solver {
     const plusPlus = new RegExp(String.raw`\+\+`, "g");
     const emptyBrackets = new RegExp(String.raw`\(\)`, "g");
 
+    expr = expr.replace(/$/gm, "");
     expr = expr.replace(/\s/g, "");
-    expr = expr.replace(/,/g, "");
+    expr = expr.replace(/,/g, ".");
 
     while (
       minMin.test(expr) ||
@@ -126,11 +127,11 @@ export default class Solver {
       plusPlus.test(expr) ||
       emptyBrackets.test(expr)
     ) {
-      expr = expr.replace(/--/g, "+");
-      expr = expr.replace(/\+-/g, "-");
-      expr = expr.replace(/-\+/g, "-");
-      expr = expr.replace(/\+\+/g, "+");
-      expr = expr.replace(/\(\)/g, "");
+      expr = expr.replace(minMin, "+");
+      expr = expr.replace(plusMin, "-");
+      expr = expr.replace(minPlus, "-");
+      expr = expr.replace(plusPlus, "+");
+      expr = expr.replace(emptyBrackets, "");
     }
 
     return expr;

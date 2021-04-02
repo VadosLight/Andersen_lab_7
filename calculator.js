@@ -16,32 +16,38 @@ document.addEventListener("keydown", (e) => {
     processingButton(e.key);
   } else if (e.code === "Backspace") {
     processingButton("del");
-  } else if (e.key === "Enter") {
+  } else if (e.key === "Enter" || e.key === "=") {
     processingButton("=");
   }
 });
 
 function processingButton(val) {
   const expr = inputField.value;
+  const MAX_LENGTH = 50;
 
-  if (expr === "Infinity" || expr === "Invalid") inputField.value = "";
+  if (expr === "Infinity" || expr === "Invalid expression")
+    inputField.value = "";
 
   if (val === "del" && expr.length > 0) {
     inputField.value = expr.slice(0, -1);
   } //
-  else if (arrNums.indexOf(val) > -1) {
+  else if (arrNums.indexOf(val) > -1 && expr.length < MAX_LENGTH) {
     inputField.value += val;
   } //
-  else if (arrSym.indexOf(val) > -1) {
+  else if (arrSym.indexOf(val) > -1 && expr.length < MAX_LENGTH) {
     inputField.value += val;
   } //
   else if (val === "=" && expr.length > 0) {
     if (Solver.isValidExpr(expr)) {
-      inputField.value = Intl.NumberFormat("en", {
+      inputField.value = Intl.NumberFormat("ru", {
         maximumFractionDigits: 8,
       }).format(Solver.solveExpression(expr));
     } else {
-      inputField.value = "Invalid";
+      const tmp = inputField.value;
+      inputField.value = "Invalid expression";
+      setTimeout(() => {
+        inputField.value = tmp;
+      }, 700);
     }
   }
 }
