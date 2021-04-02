@@ -6,24 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Калькулятор</title>
     <link rel="stylesheet" href="index.css" />
-    <nu-theme hue="208" saturation="50" pastel></nu-theme>
   </head>
   <body>
-    <nu-grid class="calculator" shadow="1" gap="1x">
+    <div class="calculator" shadow="1" gap="1x">
       <input
         type="text"
-        id="calculator__input"
-        placeholder="..."
+        id="calculator__input"        
+        placeholder="..."      
         readonly
-        disabled
-        
+        disabled        
       ></input>
-
       <button class="calculator__button">1</button>
       <button class="calculator__button">2</button>
       <button class="calculator__button">3</button>
-      <button class="calculator__button">&lang;</button>
-      <button class="calculator__button">&rang;</button>
+      <button class="calculator__button">&#40;</button>
+      <button class="calculator__button">&#41;</button>
 
       <button class="calculator__button">4</button>
       <button class="calculator__button">5</button>
@@ -40,13 +37,8 @@
       <button class="calculator__button">0</button>
       <button class="calculator__button">.</button>
       <button class="calculator__button">del</button>
-
       <button id="btn_solve" class="calculator__button">=</button>
-    </nu-grid>
-
-    <script src="https://cdn.skypack.dev/numl@v1.0.1" type="module"></script>
-    <script type="module" src="./index.js"></script>
+    </div>   
+    <script type="module" src="./calculator.js"></script>
   </body>
 </html>
-<!-- тут пока пропуск но можно добавить ещё функции -->
-<!-- при нажатии кнопки считываем содержимое и отправляем в обработчик -->

@@ -9,6 +9,10 @@ export default class Solver {
     String.raw`\b(?:(?!^|\*|\/))-(?!\d\/|\*)|\b(?:(?!^|\*|\/))\+`,
     "g"
   );
+  static regCorrectOperand = new RegExp(
+    String.raw`(?:[\/\*\+\-][\/\*\+\-])|(?:^[\*\/\+])|(?:[\/\*\-\+]$)|[a-zA-zа-яА-Я]`,
+    "g"
+  );
 
   constructor() {
     if (this instanceof Solver) {
@@ -17,15 +21,16 @@ export default class Solver {
   }
 
   static solveExpression(expr) {
-    expr = expr.replace(/\s/g, "");
-    expr = this.replacePlusMinus(expr);
+    expr = this.prepareExpr(expr);
+    if (!this.isValidExpr(expr)) return "Invalid";
 
     while (expr.match(this.regBrkt)) {
       const subExprMatch = expr.match(this.regBrkt);
       const subExpr = subExprMatch[1];
       expr = expr.replace(subExprMatch[0], this.solvePrimitive(subExpr));
-      expr = this.replacePlusMinus(expr);
+      expr = this.prepareExpr(expr);
     }
+
     return this.solvePrimitive(expr);
   }
 
@@ -104,23 +109,57 @@ export default class Solver {
     return numbers[0] || 0;
   }
 
-  static replacePlusMinus(expr) {
-    const minMin = new RegExp("--", "g");
-    const plusMin = new RegExp("/+-/", "g");
-    const minPlus = new RegExp("-+", "g");
-    const PlusPlus = new RegExp("/+/+", "g");
+  static prepareExpr(expr) {
+    const minMin = new RegExp(String.raw`--`, "g");
+    const plusMin = new RegExp(String.raw`\+-`, "g");
+    const minPlus = new RegExp(String.raw`-\+`, "g");
+    const plusPlus = new RegExp(String.raw`\+\+`, "g");
+    const emptyBrackets = new RegExp(String.raw`\(\)`, "g");
+
+    expr = expr.replace(/\s/g, "");
+    expr = expr.replace(/,/g, "");
 
     while (
       minMin.test(expr) ||
       plusMin.test(expr) ||
       minPlus.test(expr) ||
-      PlusPlus.test(expr)
+      plusPlus.test(expr) ||
+      emptyBrackets.test(expr)
     ) {
       expr = expr.replace(/--/g, "+");
       expr = expr.replace(/\+-/g, "-");
       expr = expr.replace(/-\+/g, "-");
       expr = expr.replace(/\+\+/g, "+");
+      expr = expr.replace(/\(\)/g, "");
     }
+
     return expr;
+  }
+
+  static isValidExpr(expr) {
+    expr = this.prepareExpr(expr);
+    const isValidOperand = !(expr.match(this.regCorrectOperand) || false);
+    return isValidOperand && this.isValidBrackets(expr);
+  }
+
+  static isValidBrackets(expr) {
+    let count = 0;
+    for (let i = 0; i < expr.length; i++) {
+      if (expr[i] == "(") {
+        count++;
+      } else if (expr[i] == ")") {
+        if (count == 0) {
+          return false;
+        } else {
+          count--;
+        }
+      }
+    }
+
+    if (count == 0) {
+      return true;
+    }
+
+    return false;
   }
 }
