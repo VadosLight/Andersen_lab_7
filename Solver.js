@@ -1,4 +1,4 @@
-export default class Solver {
+class Solver {
   static regBrkt = new RegExp(String.raw`\(([^\(|\)]+)\)`);
   static regReplaceMinusOnPlusMinus = new RegExp(
     String.raw`(?!^)(-)(?=\d(?:\.\d)?(?:\*|\/))`,
@@ -10,9 +10,9 @@ export default class Solver {
     "g"
   );
   static regCorrectOperand = new RegExp(
-    String.raw`(?:[\/\*\+\-\.][\/\*\+\-\.])`+
-    String.raw`|(?:^[\*\/\+])|(?:[\/\*\-\+]$)|[a-zA-zа-яА-Я]`+
-    String.raw`|(?:\.[\d]*\.)|(?:\.[\*\/\-\+]*\.)|(?:\d\(|\)\d|\.\(|\)\.)|\(\)`,
+    String.raw`(?:[\/\*\+\-\.][\/\*\+\-\.])` +
+      String.raw`|(?:^[\*\/\+])|(?:[\/\*\-\+]$)|[a-zA-zа-яА-Я]` +
+      String.raw`|(?:\.[\d]*\.)|(?:\.[\*\/\-\+]*\.)|(?:\d\(|\)\d|\.\(|\)\.)|\(\)`,
     "g"
   );
 
