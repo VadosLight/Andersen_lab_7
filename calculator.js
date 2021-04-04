@@ -24,7 +24,12 @@ function processingButton(val) {
   const expr = inputField.value;
   const MAX_LENGTH = 50;
 
-  if (expr === "Infinity" || expr === "Invalid expression")
+  if (
+    expr === "Infinity" ||
+    expr === "Invalid expression" ||
+    expr === "∞" ||
+    expr === "undefined"
+  )
     inputField.value = "";
 
   if (val === "del" && expr.length > 0) {
